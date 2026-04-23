@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Era Echo：一个基于 Taylor Swift 音乐作品偏好的粉丝向性格测试网页应用。">
+  <meta name="theme-color" content="#24334e">
+  <title>Era Echo | Taylor Swift 音乐人格测试</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/eras-echo-logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="ambient ambient-top" aria-hidden="true"></div>
+  <div class="ambient ambient-bottom" aria-hidden="true"></div>
+
+  <div class="app-shell container-xxl py-4 py-lg-5">
+    <header class="site-header mb-4 mb-lg-5">
+      <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-4">
+        <div class="brand-lockup">
+          <div class="brand-mark-wrap">
+            <img src="assets/img/eras-echo-logo.svg" alt="Era Echo logo" class="brand-mark">
+          </div>
+          <div>
+            <p class="brand-kicker mb-1">Unofficial Fan-Made Experience</p>
+            <h1 class="brand-title mb-1">Era Echo</h1>
+            <p class="brand-copy mb-0">一份把 Taylor Swift 不同时期音乐气质，翻译成你的人格轮廓的小测验。</p>
+          </div>
+        </div>
+
+        <button id="headerSavedBtn" class="glass-button compact-button" type="button" hidden>
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          查看上次结果
+        </button>
+      </div>
+    </header>
+
+    <main id="appRoot">
+      <section id="introScreen" class="screen is-active">
+        <div class="row g-4 align-items-stretch">
+          <div class="col-lg-7">
+            <div class="stage-card hero-card h-100">
+              <span class="section-eyebrow">Taylor Swift Music Personality Quiz</span>
+              <h2 class="display-title">从金色乡村到午夜霓虹，测出你的 Taylor 音乐人格</h2>
+              <p class="lead-copy">
+                12 道选择题，覆盖 Taylor Swift 从早期乡村叙事、主流流行、独立民谣到深夜电子感的代表风格。
+                你的结果会结合音乐偏好与轻量人格维度，生成一份可保存、可分享的专属报告。
+              </p>
+
+              <div class="era-chip-row">
+                <span class="era-chip era-golden">Debut / Fearless / Speak Now</span>
+                <span class="era-chip era-scarlet">Red / TTPD</span>
+                <span class="era-chip era-neon">1989 / Lover</span>
+                <span class="era-chip era-midnight">reputation / Midnights</span>
+                <span class="era-chip era-willow">folklore / evermore</span>
+              </div>
+
+              <div class="hero-actions d-flex flex-wrap gap-3">
+                <button id="startQuizBtn" class="hero-button" type="button">
+                  <i class="fa-solid fa-headphones-simple"></i>
+                  开始测试
+                </button>
+                <button id="loadSavedBtn" class="glass-button" type="button" hidden>
+                  <i class="fa-solid fa-floppy-disk"></i>
+                  读取上次结果
+                </button>
+              </div>
+
+              <div class="hero-notes">
+                <div class="note-pill">
+                  <i class="fa-solid fa-music"></i>
+                  每题单独分页展示
+                </div>
+                <div class="note-pill">
+                  <i class="fa-solid fa-mobile-screen-button"></i>
+                  桌面与移动端都友好
+                </div>
+                <div class="note-pill">
+                  <i class="fa-solid fa-share-nodes"></i>
+                  支持本地保存与结果分享
+                </div>
+              </div>
+
+              <p class="tiny-note mb-0">
+                这是一个非官方粉丝向网页应用，不使用官方视觉素材。分析结果用于娱乐与自我观察，灵感参考音乐偏好与大五人格中的开放性、外向驱动力、关系温度等维度。
+              </p>
+
+              <noscript class="noscript-box">
+                这个页面需要启用 JavaScript 才能正常进行答题与结果分析。
+              </noscript>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="stage-card info-card h-100">
+              <div class="stat-grid">
+                <article class="stat-card">
+                  <span class="stat-icon"><i class="fa-solid fa-list-check"></i></span>
+                  <div>
+                    <strong>12 道题</strong>
+                    <p>覆盖多张代表专辑与风格转变</p>
+                  </div>
+                </article>
+                <article class="stat-card">
+                  <span class="stat-icon"><i class="fa-solid fa-star-half-stroke"></i></span>
+                  <div>
+                    <strong>5 类音乐人格</strong>
+                    <p>从乡村、流行、独立到午夜锋芒</p>
+                  </div>
+                </article>
+                <article class="stat-card">
+                  <span class="stat-icon"><i class="fa-solid fa-chart-line"></i></span>
+                  <div>
+                    <strong>双层结果</strong>
+                    <p>风格匹配度 + 性格特质分析</p>
+                  </div>
+                </article>
+                <article class="stat-card">
+                  <span class="stat-icon"><i class="fa-solid fa-cloud-arrow-down"></i></span>
+                  <div>
+                    <strong>零构建部署</strong>
+                    <p>纯静态页面，直接上传即可访问</p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="palette-panel">
+                <div class="palette-heading">
+                  <span class="mini-label">视觉灵感</span>
+                  <p>从金色、赤红、玫瑰霓虹、午夜蓝与木质奶油色中提炼一套专属 fan-made 配色。</p>
+                </div>
+                <div class="palette-swatches">
+                  <span class="swatch swatch-golden"></span>
+                  <span class="swatch swatch-scarlet"></span>
+                  <span class="swatch swatch-neon"></span>
+                  <span class="swatch swatch-midnight"></span>
+                  <span class="swatch swatch-willow"></span>
+                </div>
+              </div>
+
+              <div id="savedResultPanel" class="saved-panel" hidden>
+                <div class="saved-panel-head">
+                  <span class="mini-label">最近一次结果</span>
+                  <button id="savedPanelBtn" class="link-button" type="button">立即查看</button>
+                </div>
+                <h3 id="savedResultTitle" class="saved-title"></h3>
+                <p id="savedResultCopy" class="saved-copy mb-0"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="quizScreen" class="screen" aria-live="polite">
+        <div class="row g-4 align-items-stretch">
+          <div class="col-lg-8">
+            <div class="stage-card quiz-card h-100">
+              <div class="quiz-topbar">
+                <div>
+                  <span class="mini-label">当前进度</span>
+                  <p id="progressLabel" class="progress-label mb-0">第 1 题 / 共 12 题</p>
+                </div>
+                <div class="progress-shell" aria-hidden="true">
+                  <div id="progressFill" class="progress-fill"></div>
+                </div>
+              </div>
+
+              <div id="questionCard" class="question-card">
+                <div class="question-meta-row">
+                  <span id="questionNumber" class="question-number">Q1</span>
+                  <span id="questionTheme" class="question-theme">通勤 BGM</span>
+                </div>
+                <h3 id="questionTitle" class="question-title">题目加载中...</h3>
+                <p id="questionHint" class="question-hint">请选择最像你当下偏好的选项。</p>
+                <div id="optionsContainer" class="option-list"></div>
+              </div>
+
+              <div class="quiz-actions d-flex flex-column flex-sm-row justify-content-between gap-3">
+                <button id="prevQuestionBtn" class="glass-button" type="button">
+                  <i class="fa-solid fa-arrow-left"></i>
+                  上一题
+                </button>
+                <button id="nextQuestionBtn" class="hero-button secondary-button" type="button">
+                  下一题
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="stage-card side-panel h-100">
+              <div class="side-panel-block">
+                <span class="mini-label">这一题在捕捉</span>
+                <h3 id="liveEraTitle" class="side-title">你的第一反应风格</h3>
+                <p id="liveEraCopy" class="side-copy mb-0">比起“正确答案”，这里更在意你最想点开的那首歌。</p>
+              </div>
+
+              <div class="side-panel-block">
+                <span class="mini-label">答题提示</span>
+                <ul class="micro-list">
+                  <li>跟着直觉选，不用按“资深粉”标准答。</li>
+                  <li>每题都可以返回修改，系统会实时重算结果。</li>
+                  <li>结果页会生成歌曲推荐、演唱会建议与分享文案。</li>
+                </ul>
+              </div>
+
+              <div class="side-panel-block">
+                <span class="mini-label">章节进度</span>
+                <div id="progressDots" class="progress-dots"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="resultScreen" class="screen">
+        <div class="row g-4 align-items-stretch">
+          <div class="col-xl-8">
+            <div class="stage-card result-hero">
+              <span class="section-eyebrow">Your Era Echo</span>
+              <div class="result-head">
+                <div class="result-copy-wrap">
+                  <p id="resultBadge" class="match-chip">匹配中</p>
+                  <h2 id="resultTitle" class="result-title">你的结果</h2>
+                  <p id="resultSubtitle" class="result-subtitle mb-0">风格分析已生成</p>
+                </div>
+                <div class="match-orb">
+                  <span>匹配度</span>
+                  <strong id="matchScore">0%</strong>
+                </div>
+              </div>
+
+              <p id="resultSummary" class="result-summary mb-0"></p>
+
+              <div class="share-actions d-flex flex-wrap gap-3">
+                <button id="shareBtn" class="hero-button secondary-button" type="button">
+                  <i class="fa-solid fa-share-nodes"></i>
+                  分享结果
+                </button>
+                <button id="copyBtn" class="glass-button" type="button">
+                  <i class="fa-solid fa-copy"></i>
+                  复制文案
+                </button>
+                <button id="restartBtn" class="glass-button" type="button">
+                  <i class="fa-solid fa-rotate-right"></i>
+                  重新测试
+                </button>
+              </div>
+            </div>
+
+            <div class="row g-4 mt-1">
+              <div class="col-md-6">
+                <div class="stage-card result-card h-100">
+                  <span class="mini-label">Taylor 风格光谱</span>
+                  <div id="styleSpectrum" class="metric-stack"></div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="stage-card result-card h-100">
+                  <span class="mini-label">人格维度画像</span>
+                  <div id="traitBars" class="metric-stack"></div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="stage-card result-card">
+                  <div class="row g-4">
+                    <div class="col-lg-6">
+                      <span class="mini-label">性格特质分析</span>
+                      <ul id="traitHighlights" class="detail-list"></ul>
+                    </div>
+                    <div class="col-lg-6">
+                      <span class="mini-label">推荐你去听</span>
+                      <ul id="songRecommendations" class="detail-list"></ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4">
+            <div class="stage-card result-card concert-card">
+              <span class="mini-label">适合你的演唱会体验</span>
+              <h3 id="concertTitle" class="concert-title">正在生成建议...</h3>
+              <p id="concertSuggestion" class="concert-copy mb-0"></p>
+              <div id="concertTags" class="tag-cloud"></div>
+            </div>
+
+            <div class="stage-card result-card psychology-card mt-4">
+              <span class="mini-label">分析依据</span>
+              <p id="psychologyNote" class="mb-0"></p>
+              <div class="saved-meta">
+                <i class="fa-solid fa-floppy-disk"></i>
+                <span id="savedTimestamp">结果会自动保存到本地浏览器。</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p class="mb-0">
+        Built with HTML5, CSS3, JavaScript, Bootstrap and Font Awesome. 适合部署到 GitHub Pages、Netlify、Vercel 等任意静态托管平台。
+      </p>
+    </footer>
+  </div>
+
+  <div id="statusToast" class="status-toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/app.js" defer></script>
+</body>
+</html>
